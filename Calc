@@ -1,0 +1,55 @@
+/*
+ * Implement all your JavaScript in this file!
+ */
+
+var prevInput = '';
+var prevNum;
+var lastSign;
+
+function numButtonHandler() {
+	var num = $(this).val();
+	$('#display').val(Number(prevInput + num));
+	prevInput += num;
+}
+
+function clearButtonHandler() {
+	$('#display').val('');
+	prevInput = '';
+	lastSign = undefined;
+}
+
+function lastPriorityHandler() {
+	prevNum = $('#display').val();
+	//alert(lastSign);
+	prevInput = ('');
+	/*if(lastSign != Undefined)
+		equalsHandler();*/
+	lastSign = $(this).prop('id');
+	//alert(lastSign);
+}
+
+function equalsHandler() {
+	if(lastSign == 'addButton')
+		$('#display').val(Number(prevNum)+Number($('#display').val()));
+	if(lastSign == 'subtractButton')
+		result = (Number(prevNum)-Number($('#display').val()));
+	/*if(lastSign == 'multiplyButton')
+		result = (Number(prevNum)*Number($('#display').val()));
+	if(lastSign == 'divideButton')
+		result = (Number(prevNum)/Number($('#display').val()));*/
+}
+
+$('#button0').click(numButtonHandler);
+$('#button1').click(numButtonHandler);
+$('#button2').click(numButtonHandler);
+$('#button3').click(numButtonHandler);
+$('#button4').click(numButtonHandler);
+$('#button5').click(numButtonHandler);
+$('#button6').click(numButtonHandler);
+$('#button7').click(numButtonHandler);
+$('#button8').click(numButtonHandler);
+$('#button9').click(numButtonHandler);
+$('#clearButton').click(clearButtonHandler);
+$('#addButton').click(lastPriorityHandler);
+$('#subtractButton').click(lastPriorityHandler);
+$('#equalsButton').click(equalsHandler)
