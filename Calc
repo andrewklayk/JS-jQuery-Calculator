@@ -3,8 +3,8 @@
  */
 
 var prevInput = '';
-var prevNum;
-var lastSign;
+var prevNum = '';
+var lastSign = '';
 
 function numButtonHandler() {
 	var num = $(this).val();
@@ -12,21 +12,30 @@ function numButtonHandler() {
 	prevInput += num;
 }
 
-function clearButtonHandler() {
+function clear() {
 	$('#display').val('');
 	prevInput = '';
-	lastSign = undefined;
+	lastSign = '';
 }
 
 function lastPriorityHandler() {
+	if(lastSign != '')
+		equalsHandler();
 	prevNum = $('#display').val();
 	//alert(lastSign);
 	prevInput = ('');
-	/*if(lastSign != Undefined)
-		equalsHandler();*/
 	lastSign = $(this).prop('id');
 	//alert(lastSign);
 }
+
+function firstPriorityHandler() {
+	if(lastSign == '' || lastSign == 'divideButton' || lastSign == 'multiplyButton') {
+		prevNum = $('#display').val();
+		prevInput = ('');
+		lastSign = $(this).prop('id');
+	}
+	else {
+		var 
 
 function equalsHandler() {
 	if(lastSign == 'addButton')
@@ -37,6 +46,8 @@ function equalsHandler() {
 		result = (Number(prevNum)*Number($('#display').val()));
 	if(lastSign == 'divideButton')
 		result = (Number(prevNum)/Number($('#display').val()));*/
+	lastSign = '';
+	prevNum = '';
 }
 
 $('#button0').click(numButtonHandler);
@@ -49,7 +60,7 @@ $('#button6').click(numButtonHandler);
 $('#button7').click(numButtonHandler);
 $('#button8').click(numButtonHandler);
 $('#button9').click(numButtonHandler);
-$('#clearButton').click(clearButtonHandler);
+$('#clearButton').click(clear);
 $('#addButton').click(lastPriorityHandler);
 $('#subtractButton').click(lastPriorityHandler);
 $('#equalsButton').click(equalsHandler)
